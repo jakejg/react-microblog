@@ -7,7 +7,7 @@ const PostListItem = ({id, title, description}) => {
     return (
         <div className="PostListItem">
            <Link to={`/${id}`}>{title}</Link>
-           <div>{description}</div>
+           <div><i>{description}</i></div>
         </div>
     );
 }

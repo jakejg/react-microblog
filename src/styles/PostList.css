@@ -1,0 +1,13 @@
+.PostList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.PostListItem {
+    border: solid 1px rgb(212, 209, 209);
+    border-radius: 10px;
+    background-color: rgb(236, 236, 236);
+    padding: 20px;
+    margin: 10px;
+}

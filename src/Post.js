@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-
+import './styles/Post.css';
 const Post = ({posts}) => {
     const { postId } = useParams();
     const postIdKey = Object.keys(posts).find(id => id === postId);
@@ -8,8 +8,8 @@ const Post = ({posts}) => {
 
     return (
         <div className="Post">
-           <h4>{post.title}</h4>
-           <div>{post.description}</div>
+           <h3>{post.title}</h3>
+           <div><i>{post.description}</i></div>
            <div>{post.body}</div>
         </div>
     );
