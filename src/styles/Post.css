@@ -1,3 +1,13 @@
 .Post {
     margin: 10px;
 }
+
+.Post-comments-list{
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.Post-comments-li{
+    padding-left: 0px;
+}

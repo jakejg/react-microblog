@@ -5,7 +5,7 @@ import './App.css';
 
 
 function App() {
-    const [posts, setPosts] = useState({12:{title: "Test", description: "This is a test post", body: "Test this thing out!"}});
+    const [posts, setPosts] = useState({12:{title: "Test", description: "This is a test post", body: "Test this thing out!", comments:{}}});
 
     const addOrEditPost = ({title, description, body}, id) => {
         setPosts(posts => {
