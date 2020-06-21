@@ -1,7 +1,7 @@
 import React from 'react';
 import PostList from './PostList';
 
-const Home = () => {
+const Home = ({posts}) => {
     return(
        <PostList posts={posts} />
     )

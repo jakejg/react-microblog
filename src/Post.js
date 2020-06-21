@@ -1,13 +1,16 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 
-const Post = ({id, title, description, body}) => {
-
+const Post = ({posts}) => {
+    const { postId } = useParams();
+    const postIdKey = Object.keys(posts).find(id => id === postId);
+    const post = posts[postIdKey];
 
     return (
         <div className="Post">
-           <h4>{title}</h4>
-           <div>{description}</div>
-           <div>{body}</div>
+           <h4>{post.title}</h4>
+           <div>{post.description}</div>
+           <div>{post.body}</div>
         </div>
     );
 }
