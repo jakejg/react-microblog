@@ -1,21 +1,10 @@
-// import React from 'react';
-// import  { Route, Switch, Redirect } from 'react-router-dom';
+import React from 'react';
+import PostList from './PostList';
 
-// const Routes = () => {
-//     return(
-//         <Switch>
-//             <Route exact path='/'>
-//                 <ProductsList />
-//             </Route>
-//             <Route exact path='/products/:id'>
-//                 <ProductDetail />
-//             </Route>
-//             <Route exact path='/cart'>
-//                 <Cart />
-//             </Route>
-//             <Redirect to='/' />
-//         </Switch>
-//     )
-// }
+const Home = () => {
+    return(
+       <PostList posts={posts} />
+    )
+}
 
-// export default Routes;
+export default Home;

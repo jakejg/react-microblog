@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import { Button } from 'reactstrap';
 import FormGroupComp from './FormGroupComp';
 import { useHistory, Link } from 'react-router-dom';
-// import { useDispatch } from 'react-redux';
 
-
-const NewPostForm = () => {
+const NewPostForm = ({addPost}) => {
     const [formData, setFormData] = useState({title: "", description: "", body: ""});
     const history = useHistory();
 
@@ -16,6 +14,7 @@ const NewPostForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        addPost(formData);
         history.push('/')
     }
 
