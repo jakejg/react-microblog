@@ -5,7 +5,7 @@ import Home from './Home';
 import Post from './Post';
 
 
-const Routes = ({posts, addOrEditPost}) => {
+const Routes = ({posts, addOrEditPost, deletePost}) => {
     return(
         <Switch>
             <Route exact path='/'>
@@ -15,7 +15,7 @@ const Routes = ({posts, addOrEditPost}) => {
                 <NewPostForm addOrEditPost={addOrEditPost} title="New Post"/>
             </Route>
             <Route exact path='/:postId'>
-                <Post posts={posts} addOrEditPost={addOrEditPost}/>
+                <Post posts={posts} addOrEditPost={addOrEditPost} deletePost={deletePost}/>
             </Route>
 
             <Redirect to='/' />

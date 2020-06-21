@@ -14,12 +14,20 @@ function App() {
             return postsCopy;
         })
     }
+    
+    const deletePost = (id) => {
+        setPosts(posts => {
+            const postsCopy = {...posts};
+            delete postsCopy[id];
+            return postsCopy;
+        })
+    }
 
 
     return (
         <div>
             <Navbar />
-            <Routes posts={posts} addOrEditPost={addOrEditPost} />
+            <Routes posts={posts} addOrEditPost={addOrEditPost} deletePost={deletePost} />
         </div>
     );
 }
