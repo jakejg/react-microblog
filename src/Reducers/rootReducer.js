@@ -15,15 +15,27 @@ const INITIAL_STATE = {
 const postReducer = (state=INITIAL_STATE, action) => {
     switch(action.type){
         case ADD_POST:
-            const { title, description, body } = action.postData;
-            const AddCopy = {...state}
-            AddCopy[action.id] = {title, description, body, comments: {} }
-            return AddCopy
+            return {
+                ...state,
+                [action.id]: {
+                    ...state[action.id], 
+                    ...action.postData,
+                    comments: {}
+                }
+            }
         
         case EDIT_POST:
-            const EditCopy = {...state}
-            EditCopy[action.id] = {...action.postData, comments: EditCopy[action.id].comments }
-            return EditCopy
+            return {
+                ...state,
+                [action.id]: {
+                    ...state[action.id], 
+                    ...action.postData,
+                    comments: {
+                        ...state[action.id].comments,
+                    }
+                }
+            }
+            
 
         case DELETE_POST:
             const stateCopy = {...state};
@@ -39,7 +51,7 @@ const postReducer = (state=INITIAL_STATE, action) => {
         case DELETE_COMMENT:
             const deleteCommentCopy = {...state};
             delete deleteCommentCopy[action.postId].comments[action.commentId];
-            return deleteCommentCopy
+            return deleteCommentCopy;
 
         default:
             return state
