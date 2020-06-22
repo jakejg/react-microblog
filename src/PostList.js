@@ -3,11 +3,11 @@ import PostListItem from './PostListItem'
 import './styles/PostList.css'
 import { useSelector } from 'react-redux';
 const PostList = () => {
-    const posts = useSelector(store => store)
+    const posts = useSelector(store => store.titles)
 
     return (
         <div className="PostList">
-           {Object.keys(posts).map(id => <PostListItem key={id} id={id} title={posts[id].title} description={posts[id].description} />)}
+           {posts.map(({id, title, description }) => <PostListItem key={id} id={id} title={title} description={description} />)}
         </div>
     );
 }

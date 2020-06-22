@@ -11,7 +11,7 @@ import { deletePost } from './Reducers/actionCreators';
 const Post = () => {
     const [edit, setEdit] = useState(false);
     const history = useHistory();
-    const posts = useSelector(store => store);
+    const posts = useSelector(store => store.posts);
     const dispatch = useDispatch();
 
     const { postId } = useParams();
@@ -48,4 +48,4 @@ const Post = () => {
 
 export default Post;
 
-// 3:20
+// 6:30

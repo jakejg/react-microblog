@@ -2,8 +2,28 @@ import {ADD_POST,
         EDIT_POST,
         DELETE_POST,
         ADD_COMMENT,
-        DELETE_COMMENT } from './actionTypes';
+        DELETE_COMMENT,
+        LOAD_POSTS } from './actionTypes';
+import axios from 'axios';
 
+const BASE_URL = process.env.REACT_APP_BASE_URL || `http://localhost:5000`
+
+
+export const getPosts = () => {
+    return async (dispatch) => {
+        try{
+            const data = axios.get(`${BASE_URL}/api/posts`)
+            dispatch(loadPosts)
+        }
+        catch (e){
+
+        }
+    }
+}    
+
+export const loadPosts = (posts) => {
+    return {type: LOAD_POSTS, posts}
+}
 
 export const addPost = (postData, id) => {
     return {type: ADD_POST, id, postData}
