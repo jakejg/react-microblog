@@ -3,26 +3,52 @@ import {ADD_POST,
         DELETE_POST,
         ADD_COMMENT,
         DELETE_COMMENT,
-        LOAD_POSTS } from './actionTypes';
+        LOAD_POSTS,
+        ERROR,
+        LOAD_TITLES } from './actionTypes';
 import axios from 'axios';
 
 const BASE_URL = process.env.REACT_APP_BASE_URL || `http://localhost:5000`
 
 
-export const getPosts = () => {
+export const getTitles = () => {
     return async (dispatch) => {
         try{
-            const data = axios.get(`${BASE_URL}/api/posts`)
-            dispatch(loadPosts)
+            const res = await axios.get(`${BASE_URL}/api/posts`)
+            console.log(res.data)
+            dispatch(loadTitles(res.data))
         }
         catch (e){
-
+            dispatch(gotError(e.response))
         }
     }
-}    
+}
 
-export const loadPosts = (posts) => {
-    return {type: LOAD_POSTS, posts}
+export const getFullPosts = (id) => {
+    return async (dispatch) => {
+        console.log('yes')
+        try{
+            const res = await axios.get(`${BASE_URL}/api/posts/${id}`)
+            console.log(res.data)
+            dispatch(loadPosts(res.data))
+        }
+        catch (e){
+            dispatch(gotError(e.response))
+        }
+    }
+}
+
+
+export const gotError = (msg) => {
+    return {type: ERROR, msg}
+}
+
+export const loadTitles = (titles) => {
+    return {type: LOAD_TITLES, titles}
+}
+
+export const loadPosts = (post) => {
+    return {type: LOAD_POSTS, post}
 }
 
 export const addPost = (postData, id) => {

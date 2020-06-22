@@ -1,8 +1,15 @@
-import React from 'react';
-import PostListItem from './PostListItem'
-import './styles/PostList.css'
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import PostListItem from './PostListItem';
+import './styles/PostList.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { getTitles } from './Reducers/actionCreators';
 const PostList = () => {
+    const dispatch = useDispatch();
+
+    useEffect(() =>{
+        dispatch(getTitles())
+    }, [dispatch])
+
     const posts = useSelector(store => store.titles)
 
     return (

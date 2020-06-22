@@ -1,18 +1,20 @@
 import {ADD_POST,
     EDIT_POST,
-    DELETE_POST,
-    ADD_COMMENT,
-    DELETE_COMMENT } from './actionTypes';
+    DELETE_POST, 
+    LOAD_TITLES} from './actionTypes';
 
-const INITIAL_STATE = [
-    {   id: "1",
-        title: "Test", 
-        description: "This is a test post", 
-    } 
-]       
-const titlesReducer = (state=INITIAL_STATE, action) => {
+// const INITIAL_STATE = [
+//     {   id: "1",
+//         title: "Test", 
+//         description: "This is a test post", 
+//     } 
+// ]       
+const titlesReducer = (state=[], action) => {
 
     switch(action.type){
+        case LOAD_TITLES:
+            return action.titles
+
         case ADD_POST:
             const {title, description} = action.postData
             return [

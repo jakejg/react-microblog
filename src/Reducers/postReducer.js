@@ -2,25 +2,42 @@ import {ADD_POST,
     EDIT_POST,
     DELETE_POST,
     ADD_COMMENT,
-    DELETE_COMMENT } from './actionTypes';
+    DELETE_COMMENT, 
+    LOAD_POSTS } from './actionTypes';
 
-const INITIAL_STATE = {
-    1: {
-        title: "Test", 
-        description: "This is a test post", 
-        body: "Test this thing out!",
-        comments: {2:"this is great"}
-    } 
-}        
-const postReducer = (state=INITIAL_STATE, action) => {
+// const INITIAL_STATE = {
+//     1: {
+//         title: "Test", 
+//         description: "This is a test post", 
+//         body: "Test this thing out!",
+//         comments: {2:"this is great"}
+//     } 
+// }        
+
+
+// { id,
+//     *        title,
+//     *        description,
+//     *        body,
+//     *        votes,
+//     *        comments: [ { id, text }, ... ],
+//     *      }
+const postReducer = (state={}, action) => {
     switch(action.type){
+        case LOAD_POSTS:
+            return {
+                ...state,
+                [action.post.id]: {
+                    ...action.post
+                }
+            }
         case ADD_POST:
             return {
                 ...state,
                 [action.id]: {
                     ...state[action.id], 
                     ...action.postData,
-                    comments: {}
+                    comments: []
                 }
             }
         
@@ -30,13 +47,12 @@ const postReducer = (state=INITIAL_STATE, action) => {
                 [action.id]: {
                     ...state[action.id], 
                     ...action.postData,
-                    comments: {
+                    comments: [
                         ...state[action.id].comments,
-                    }
+                    ]
                 }
             }
             
-
         case DELETE_POST:
             const stateCopy = {...state};
             delete stateCopy[action.id];
@@ -48,17 +64,21 @@ const postReducer = (state=INITIAL_STATE, action) => {
                 ...state,
                 [postId]: {
                     ...state[postId],
-                    comments:{
+                    comments:[
                         ...state[postId].comments,
-                        [commentId]: text
-                    }
+                        {id: commentId, text}
+                    ]
                 }
             }
 
         case DELETE_COMMENT:
-            const deleteCommentCopy = {...state};
-            delete deleteCommentCopy[action.postId].comments[action.commentId];
-            return deleteCommentCopy;
+            return {
+                ...state,
+                [action.postId]: {
+                    ...state[action.postId],
+                    comments: state[postId].comments.filter(comment => comment.id !== action.commentId)
+                }
+            }
 
         default:
             return state
