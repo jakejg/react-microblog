@@ -44,9 +44,18 @@ const postReducer = (state=INITIAL_STATE, action) => {
 
         case ADD_COMMENT:
             const {postId, commentId, text } = action;
-            const commentsCopy = {...state};
-            commentsCopy[postId].comments = {...commentsCopy[postId].comments, [commentId]: text}
-            return commentsCopy;
+            return {
+                ...state,
+                [postId]: {
+                    ...state[postId],
+                    comments:{
+                        ...state[postId].comments,
+                        [commentId]: text
+                    }
+                }
+            }
+            
+    
     
         case DELETE_COMMENT:
             const deleteCommentCopy = {...state};
