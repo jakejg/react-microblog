@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { Button } from 'reactstrap';
 import FormGroupComp from './FormGroupComp';
 import { useHistory, Link } from 'react-router-dom';
-import {v4 as uuid} from 'uuid';
-import { addPost, editPost, addPostToAPI } from './Reducers/actionCreators';
+import { editPostOnAPI, addPostToAPI } from './Reducers/actionCreators';
 import { useDispatch } from 'react-redux';
 
 const NewPostForm = ({title, id}) => {
@@ -19,7 +18,7 @@ const NewPostForm = ({title, id}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (id) dispatch(editPost(formData, id));
+        if (id) dispatch(editPostOnAPI(formData, id));
         else dispatch(addPostToAPI(formData));
         history.push('/')
     }

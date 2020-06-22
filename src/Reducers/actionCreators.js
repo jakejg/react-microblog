@@ -8,6 +8,7 @@ import {ADD_POST,
         LOAD_TITLES } from './actionTypes';
 import axios from 'axios';
 
+
 const BASE_URL = process.env.REACT_APP_BASE_URL || `http://localhost:5000`
 
 
@@ -50,6 +51,34 @@ export const addPostToAPI = (postData) => {
     }
 }
 
+export const editPostOnAPI = (postData, id) => {
+    return async (dispatch) => {
+        try{
+            const res = await axios.put(`${BASE_URL}/api/posts/${id}`, postData)
+            console.log(res.data)
+            dispatch(editPost(res.data))
+        }
+        catch (e){
+            console.log(e)
+            dispatch(gotError(e.response))
+        }
+    }
+}
+
+export const deletePostOnAPI = (id) => {
+    return async (dispatch) => {
+        try{
+            const res = await axios.delete(`${BASE_URL}/api/posts/${id}`)
+            console.log(res.data)
+            dispatch(deletePost(+id))
+        }
+        catch (e){
+            console.log(e)
+            dispatch(gotError(e.response))
+        }
+    }
+}
+
 
 export const gotError = (msg) => {
     return {type: ERROR, msg}
@@ -67,8 +96,8 @@ export const addPost = ({id, title, description, body}) => {
     return {type: ADD_POST, id: id, postData: {title, description, body}}
 }
 
-export const editPost = (postData, id) => {
-    return {type: EDIT_POST, id, postData}
+export const editPost = ({id, title, description, body}) => {
+    return {type: EDIT_POST, id: id, postData: {title, description, body}}
 }
 
 export const deletePost = (id) => {

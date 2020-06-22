@@ -6,7 +6,7 @@ import { Button } from 'reactstrap';
 import CommentForm from './CommentForm';
 import Comment from './Comment';
 import { useSelector, useDispatch } from 'react-redux';
-import { deletePost, getFullPosts } from './Reducers/actionCreators';
+import { deletePostOnAPI, getFullPosts } from './Reducers/actionCreators';
 
 const Post = () => {
     const [edit, setEdit] = useState(false);
@@ -29,8 +29,8 @@ const Post = () => {
     const comments = post.comments || [];
 
     const handleDelete = () => {
-        dispatch(deletePost(postIdKey));
-        history.push('/');
+        dispatch(deletePostOnAPI(postIdKey));
+        history.push('/')
     }
 
     return (

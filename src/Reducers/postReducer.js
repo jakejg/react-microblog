@@ -45,15 +45,16 @@ const postReducer = (state={}, action) => {
                 ...state,
                 [action.id]: {
                     ...state[action.id], 
-                    ...action.postData,
-                    comments: [
-                        ...state[action.id].comments,
-                    ]
+                    ...action.postData
+                    // comments: [
+                    //     ...state[action.id].comments,
+                    // ]
                 }
             }
             
         case DELETE_POST:
-            const stateCopy = {...state};
+            let stateCopy = { ...state }
+
             delete stateCopy[action.id];
             return stateCopy
 
