@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button } from 'reactstrap';
 import {v4 as uuid} from 'uuid';
 
-const NewPostForm = ({addComment, id}) => {
+const NewPostForm = ({ id}) => {
     const [formData, setFormData] = useState({text: ""});
     
     const handleChange = (e) => {

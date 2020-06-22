@@ -5,32 +5,36 @@ import NewPostForm from './NewPostForm';
 import { Button } from 'reactstrap';
 import CommentForm from './CommentForm';
 import Comment from './Comment';
+import { useSelector, useDispatch } from 'react-redux';
+import { deletePost } from './Reducers/actionCreators';
 
-const Post = ({posts, addOrEditPost, deletePost}) => {
+const Post = () => {
     const [edit, setEdit] = useState(false);
-    const [comments, setComments] = useState({})
     const history = useHistory();
+    const posts = useSelector(store => store);
+    const dispatch = useDispatch();
 
     const { postId } = useParams();
     const postIdKey = Object.keys(posts).find(id => id === postId);
     const post = posts[postIdKey];
 
     const handleDelete = () => {
-        deletePost(postIdKey);
+        dispatch(deletePost(postIdKey));
         history.push('/');
     }
 
-    const addComment = ({ text }, id) => {
-        setComments(comments => {
-            const commentsCopy = {...comments};
-            commentsCopy[id] = text;
-            return commentsCopy;
-        })
-    }
+    // const addComment = ({ text }, id) => {
+    //     setComments(comments => {
+    //         const commentsCopy = {...comments};
+    //         commentsCopy[id] = text;
+    //         return commentsCopy;
+    //     })
+    // }
+
 
     return (
         <div className="Post">
-            {edit && <NewPostForm addOrEditPost={addOrEditPost} title="Edit Post" id={postIdKey}/>}
+            {edit && <NewPostForm title="Edit Post" id={postIdKey}/>}
            <div>
                <h2>{post.title}</h2>
                <div className="Post-btns">
@@ -43,9 +47,9 @@ const Post = ({posts, addOrEditPost, deletePost}) => {
            <div className="Post-comments">
                 <h4>Comments</h4>
                 <ul className="Post-comments-list">
-                {Object.keys(comments).map(id => <li className="Post-comments-li" key={id} ><Comment id={id} text={comments[id]} /></li>)}
+                {Object.keys(post.comments).map(id => <li className="Post-comments-li" key={id} ><Comment id={id} text={post.comments[id]} /></li>)}
                 </ul> 
-                <CommentForm addComment={addComment} />
+                <CommentForm />
            </div>
         </div>
     );

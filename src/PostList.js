@@ -1,7 +1,9 @@
 import React from 'react';
 import PostListItem from './PostListItem'
 import './styles/PostList.css'
-const PostList = ({posts}) => {
+import { useSelector } from 'react-redux';
+const PostList = () => {
+    const posts = useSelector(store => store)
 
     return (
         <div className="PostList">

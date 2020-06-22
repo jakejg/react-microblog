@@ -3,26 +3,29 @@ import { Button } from 'reactstrap';
 import FormGroupComp from './FormGroupComp';
 import { useHistory, Link } from 'react-router-dom';
 import {v4 as uuid} from 'uuid';
+import { addPost, editPost } from './Reducers/actionCreators';
+import { useDispatch } from 'react-redux';
 
-const NewPostForm = ({addOrEditPost, title, id}) => {
+const NewPostForm = ({title, id}) => {
     const [formData, setFormData] = useState({title: "", description: "", body: ""});
     const history = useHistory();
+    const dispatch = useDispatch();
     
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(data => ({...data, [name]: value}));
     }
 
     const handleSubmit = (e) => {
-        
         e.preventDefault();
-        const postId = id || uuid();
-        addOrEditPost(formData, postId);
+        if (id) dispatch(editPost(formData, id));
+        else dispatch(addPost(formData, uuid()));
         history.push('/')
     }
 
     return (
-        <div className="DiscountForm">
+        <div className="PostForm">
             <h1>{title}</h1>
             <form >
                 {Object.keys(formData).map(field => <FormGroupComp key={field} field={field} formData={formData} handleChange={handleChange} type="text" />)}
