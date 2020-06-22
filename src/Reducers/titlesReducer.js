@@ -24,7 +24,6 @@ const titlesReducer = (state=[], action) => {
         
         case EDIT_POST:
             return state.map(item => {
-                console.log(item.id, action.id)
                 if (item.id === action.id) {
                     return {...item, title: action.postData.title, description: action.postData.description}
                 }
