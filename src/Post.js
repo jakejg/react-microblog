@@ -23,15 +23,6 @@ const Post = () => {
         history.push('/');
     }
 
-    // const addComment = ({ text }, id) => {
-    //     setComments(comments => {
-    //         const commentsCopy = {...comments};
-    //         commentsCopy[id] = text;
-    //         return commentsCopy;
-    //     })
-    // }
-
-
     return (
         <div className="Post">
             {edit && <NewPostForm title="Edit Post" id={postIdKey}/>}
@@ -47,9 +38,9 @@ const Post = () => {
            <div className="Post-comments">
                 <h4>Comments</h4>
                 <ul className="Post-comments-list">
-                {Object.keys(post.comments).map(id => <li className="Post-comments-li" key={id} ><Comment id={id} text={post.comments[id]} /></li>)}
+                {Object.keys(post.comments).map(id => <li className="Post-comments-li" key={id} ><Comment id={id} postId={postIdKey} text={post.comments[id]} /></li>)}
                 </ul> 
-                <CommentForm />
+                <CommentForm postId={postId} />
            </div>
         </div>
     );

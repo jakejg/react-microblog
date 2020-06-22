@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { Button } from 'reactstrap';
 import {v4 as uuid} from 'uuid';
+import { addComment } from './Reducers/actionCreators';
+import { useDispatch } from 'react-redux';
 
-const NewPostForm = ({ id}) => {
+const CommentForm = ({ postId}) => {
     const [formData, setFormData] = useState({text: ""});
+    const dispatch = useDispatch();
     
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -12,8 +15,7 @@ const NewPostForm = ({ id}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const commentId = id || uuid();
-        addComment(formData, commentId);
+        dispatch(addComment(formData.text, postId, uuid()));
     }
 
     return (
@@ -24,4 +26,4 @@ const NewPostForm = ({ id}) => {
     );
 }
 
-export default NewPostForm;
+export default CommentForm;

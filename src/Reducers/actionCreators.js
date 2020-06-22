@@ -17,10 +17,10 @@ export const deletePost = (id) => {
     return {type: DELETE_POST, id}
 }
 
-export const addComment = (postId, commentId) => {
-    return {type: ADD_COMMENT, postId, text}
+export const addComment = (text, postId, commentId) => {
+    return {type: ADD_COMMENT, postId, commentId, text: text}
 }
 
-export const deleteComment = (id) => {
-    return {type: DELETE_COMMENT, id}
+export const deleteComment = (postId, commentId) => {
+    return {type: DELETE_COMMENT, postId, commentId}
 }

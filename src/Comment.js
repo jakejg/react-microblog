@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
 import './styles/Comment.css';
+import { useDispatch } from 'react-redux';
+import { deleteComment } from './Reducers/actionCreators';
 
-const Comment = ({id , text}) => {
+const Comment = ({id, postId , text}) => {
+    const dispatch = useDispatch();
+
+    const handleClick = () => {
+        dispatch(deleteComment(postId, id))
+    }
 
     return (
         <>
-            <span className="Comment-delete">❌</span>
+            <span onClick={handleClick} className="Comment-delete">❌</span>
             {text}
         </>
     );
