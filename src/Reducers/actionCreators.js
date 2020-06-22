@@ -26,11 +26,23 @@ export const getTitles = () => {
 
 export const getFullPosts = (id) => {
     return async (dispatch) => {
-        console.log('yes')
         try{
             const res = await axios.get(`${BASE_URL}/api/posts/${id}`)
             console.log(res.data)
             dispatch(loadPosts(res.data))
+        }
+        catch (e){
+            dispatch(gotError(e.response))
+        }
+    }
+}
+
+export const addPostToAPI = (postData) => {
+    return async (dispatch) => {
+        try{
+            const res = await axios.post(`${BASE_URL}/api/posts`, postData)
+            console.log(res.data)
+            dispatch(addPost(res.data))
         }
         catch (e){
             dispatch(gotError(e.response))
@@ -51,8 +63,8 @@ export const loadPosts = (post) => {
     return {type: LOAD_POSTS, post}
 }
 
-export const addPost = (postData, id) => {
-    return {type: ADD_POST, id, postData}
+export const addPost = ({id, title, description, body}) => {
+    return {type: ADD_POST, id: id, postData: {title, description, body}}
 }
 
 export const editPost = (postData, id) => {

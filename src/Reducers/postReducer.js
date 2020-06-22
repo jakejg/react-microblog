@@ -35,7 +35,6 @@ const postReducer = (state={}, action) => {
             return {
                 ...state,
                 [action.id]: {
-                    ...state[action.id], 
                     ...action.postData,
                     comments: []
                 }
